@@ -10,7 +10,9 @@ include 'connectdb.php';
 
 // Getting the input parameter (user):
 $problemid = $_REQUEST['problem'];
-
+if(!preg_match('/^[0-9]+$/', $problemid)){
+    exit('Please enter a valid problemid!<a href="javascript:history.back(-1);">Return</a>');
+}
 // Get the attributes of the user with the given username
 $query = "SELECT submissionid, Submission.userid FROM Submission JOIN ProblemScore ON submissionid = bestsubmission WHERE Submission.problemid = $problemid and Submission.userid != '$username'";
 $result = mysqli_query($dbcon, $query)

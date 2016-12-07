@@ -12,6 +12,10 @@ $result = mysqli_query($dbcon, $query)
 
 print "<h2>Attempted Problems for $user</h2>";
 print '<ul>';
+if(mysqli_num_rows($result) == 0) {
+    print "You don't have any attempted problems!<br>";
+    exit('<a href="javascript:history.back(-1);">Return</a>');
+}
 print '<table border="1"><tr><th>ProblemID</th><th>Title</th><th>Attempts</th></tr>';
 while ($tuple = mysqli_fetch_row($result)) {
     print "<tr><td>$tuple[0]</td><td>$tuple[1]</td><td>$tuple[2]</td></tr>";

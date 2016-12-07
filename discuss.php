@@ -14,7 +14,10 @@ $problemid = $_REQUEST['problemid'];
 $query = "SELECT title, userid, time, text, discussionid FROM Discussion WHERE problemid = '$problemid'";
 $result = mysqli_query($dbcon, $query)
   or die('Query failed: ' . mysqli_error($dbcon));
-
+if(mysqli_num_rows($result) == 0) {
+    print "There are no discussions on problem $problemid!<br>";
+    exit('<a href="javascript:history.back(-1);">Return</a>');
+}
 // Printing user attributes in HTML
 print "<h2>Discussions on Problem $problemid</h2>";
 print '<ul>';
